@@ -219,6 +219,10 @@ static void _json2pb(Message& msg, json_t *root)
 		const char *name = json_object_iter_key(i);
 		json_t *jf = json_object_iter_value(i);
 
+		if (std::string(name) == "_id" || std::string(name) == "meta") {
+		  continue;
+		}
+
 		const FieldDescriptor *field = d->FindFieldByName(name);
 		if (!field)
 			field = ref->FindKnownExtensionByName(name);
